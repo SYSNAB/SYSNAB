@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SYSNAB - Computer & Network Systems</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1a1a1a;
+      color: white;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #121212;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      height: 60px;
+      width: auto;
+    }
+    nav a {
+      color: #00cfff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover, nav a.active {
+      color: #f39c12;
+    }
+    .section {
+      padding: 60px 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero {
+      background: linear-gradient(145deg, #0a0a0a, #1f1f1f);
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .slideshow {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .slide.active {
+      opacity: 1;
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .card {
+      background-color: #222;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    button {
+      background-color: #00cfff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #f39c12;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 6px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      color: #aaa;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-container">
+    <div style="background-color: #1a1a1a; padding: 5px; border-radius: 10px;"><img src="logo.jpg" alt="SYSNAB Logo" class="logo" style="background-color: transparent;" /></div>
+  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#quote">Quote</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero section" id="home">
+  <h1>Welcome to SYSNAB</h1>
+  <p>Your trusted partner in network and computer systems.</p>
+  <div class="slideshow">
+    <div class="slide active"><h2>Reliable Network Solutions</h2></div>
+    <div class="slide"><h2>High-Performance Computers</h2></div>
+    <div class="slide"><h2>Premium Accessories</h2></div>
+  </div>
+</section>
+
+<section class="section" id="products">
+  <h2>Our Products</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="https://via.placeholder.com/250x150?text=Network+System" alt="Network System">
+      <h3>Network Systems</h3>
+      <p>Routers, switches, cables, and everything you need to build a reliable network.</p>
+      <p><strong>Price:</strong> $199</p>
+      <button onclick="alert('Quote request sent!')">Request a Quote</button>
+    </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/250x150?text=Computer+System" alt="Computer System">
+      <h3>Computer Systems</h3>
+      <p>Desktops, laptops, and servers tailored for performance and reliability.</p>
+      <p><strong>Price:</strong> $799</p>
+      <button onclick="alert('Quote request sent!')">Request a Quote</button>
+    </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/250x150?text=Accessories" alt="Accessories">
+      <h3>Accessories</h3>
+      <p>Keyboards, mice, and essential peripherals to complete your setup.</p>
+      <p><strong>Price:</strong> $49</p>
+      <button onclick="alert('Quote request sent!')">Request a Quote</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="quote">
+  <h2>Request a Quote</h2>
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    <label for="product">Product Interested In:</label>
+    <select id="product">
+      <option value="Network Systems">Network Systems</option>
+      <option value="Computer Systems">Computer Systems</option>
+      <option value="Accessories">Accessories</option>
+    </select>
+    <label for="message">Additional Message:</label>
+    <textarea id="message" rows="4"></textarea>
+    <button type="submit">Send Quote Request</button>
+  </form>
+</section>
+
+
+<section class="section" id="about">
+  <h2>About SYSNAB</h2>
+  <p>SYSNAB is a specialized provider of high-end networking systems and advanced computer solutions. 
+  With a strong focus on delivering reliable, scalable, and performance-driven systems, we cater to both 
+  businesses and individuals who demand the best in technology infrastructure.</p>
+  <p>Our product portfolio includes enterprise-grade routers, switches, structured cabling, data center equipment, 
+  professional workstations, high-performance PCs, and premium accessories. Whether you’re setting up a small office network 
+  or a large IT infrastructure, SYSNAB has the tools and expertise to support your vision.</p>
+  <p>We pride ourselves on combining top-tier quality with competitive pricing, ensuring that our customers always 
+  get the best value for their investment. Partner with SYSNAB and experience excellence in every connection.</p>
+</section>
+    
+
+<section class="section" id="contact">
+  <h2>Contact Us</h2>
+  <p><strong>Email:</strong> <a href="mailto:infosysnab@gmail.com" style="color:#00cfff">infosysnab@gmail.com</a></p>
+  <p><strong>Phone 1:</strong> <a href="tel:+218912111091" style="color:#00cfff">+218912111091</a></p>
+  <p><strong>Phone 2:</strong> <a href="tel:+218924111091" style="color:#00cfff">+218924111091</a></p>
+</section>
+
+<footer>
+  <p>&copy; 2025 SYSNAB. All rights reserved.</p>
+  
+<p>
+  <a href="mailto:infosysnab@gmail.com" style="color:#00cfff">infosysnab@gmail.com</a> |
+  <a href="https://wa.me/218924111091" target="_blank" style="color:#00cfff">WhatsApp</a> |
+  <a href="tel:+218912111091" style="color:#00cfff">+218912111091</a> |
+  <a href="tel:+218924111091" style="color:#00cfff">+218924111091</a>
+</p>
+
+</footer>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  setInterval(() => {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }, 5000);
+
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+  sections.forEach(section => observer.observe(section));
+
+  const navLinks = document.querySelectorAll('header nav a');
+  window.addEventListener('scroll', () => {
+    let scrollPos = window.scrollY + 100;
+    sections.forEach(section => {
+      if(scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        document.querySelector(`header nav a[href="#${section.id}"]`).classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
