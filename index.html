@@ -60,7 +60,7 @@
     }
     .slideshow {
       position: relative;
-      height: 300px;
+      height: 700px;
       overflow: hidden;
       margin-top: 20px;
     }
@@ -131,7 +131,7 @@
     }
     .language-toggle {
       position: fixed;
-      top: 20px;
+      top: 90px;
       right: 20px;
       background-color: #00cfff;
       color: #000;
@@ -140,12 +140,56 @@
       cursor: pointer;
       font-weight: bold;
       z-index: 9999;
+      font-size: 16px;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 30px;
+      font-weight: bold;
+      z-index: 9999;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      z-index: 10000;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .notification.show {
+      opacity: 1;
+    }
+    .form-message {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+    .success {
+      background-color: #4CAF50;
+    }
+    .error {
+      background-color: #f44336;
     }
   </style>
 </head>
 <body>
 
-<div class="language-toggle" onclick="toggleLanguage()">AR</div>
+<div class="language-toggle" onclick="toggleLanguage()">العربية</div>
+<div id="notification" class="notification"></div>
+<a href="https://wa.me/218924111091" class="whatsapp-float" target="_blank">WhatsApp Us</a>
 
 <header>
   <div class="logo-container">
@@ -154,7 +198,7 @@
   <nav>
     <a href="#home">Home</a>
     <a href="#products">Products</a>
-    <a href="#quote">Quote</a>
+    <a href="#quote">Request Invoice</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -164,9 +208,9 @@
   <h1>Welcome to SYSNAB</h1>
   <p>Your trusted partner in network and computer systems.</p>
   <div class="slideshow">
-    <div class="slide active"><img src="https://images.unsplash.com/photo-1581090700227-1e8e153fa0c7" alt="Cabling" /></div>
-    <div class="slide"><img src="https://images.unsplash.com/photo-1618005198919-d3d4b5e03f8c" alt="Network Rack" /></div>
-    <div class="slide"><img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f" alt="Computer" /></div>
+    <div class="slide active"><img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cabling" /></div>
+    <div class="slide"><img src="slideshow1.png" alt="Network Rack" /></div>
+    <div class="slide"><img src="slideshow2.jpg" alt="Computer" /></div>
   </div>
 </section>
 
@@ -178,42 +222,45 @@
       <h3>Network Systems</h3>
       <p>Routers, switches, cables, and everything you need to build a reliable network.</p>
       <p><strong>Price:</strong> $199</p>
-      <button onclick="alert('Quote request sent!')">Request a Quote</button>
+      <button onclick="requestQuote('Network Systems')">Request a Quote</button>
     </div>
     <div class="card">
       <img src="https://via.placeholder.com/250x150?text=Computer+System" alt="Computer System">
       <h3>Computer Systems</h3>
       <p>Desktops, laptops, and servers tailored for performance and reliability.</p>
       <p><strong>Price:</strong> $799</p>
-      <button onclick="alert('Quote request sent!')">Request a Quote</button>
+      <button onclick="requestQuote('Computer Systems')">Request a Quote</button>
     </div>
     <div class="card">
       <img src="https://via.placeholder.com/250x150?text=Accessories" alt="Accessories">
       <h3>Accessories</h3>
       <p>Keyboards, mice, and essential peripherals to complete your setup.</p>
       <p><strong>Price:</strong> $49</p>
-      <button onclick="alert('Quote request sent!')">Request a Quote</button>
+      <button onclick="requestQuote('Accessories')">Request a Quote</button>
     </div>
   </div>
 </section>
 
 <section class="section" id="quote">
-  <h2>Request a Quote</h2>
-  <form>
+  <h2>Request an Invoice</h2>
+  <form id="invoiceForm">
     <label for="name">Name:</label>
-    <input type="text" id="name" required>
+    <input type="text" name="name" id="name" required>
     <label for="email">Email:</label>
-    <input type="email" id="email" required>
+    <input type="email" name="email" id="email" required>
+    <label for="phone">Phone Number:</label>
+    <input type="tel" name="phone" id="phone" required>
     <label for="product">Product Interested In:</label>
-    <select id="product">
+    <select name="product" id="product">
       <option value="Network Systems">Network Systems</option>
       <option value="Computer Systems">Computer Systems</option>
       <option value="Accessories">Accessories</option>
     </select>
-    <label for="message">Additional Message:</label>
-    <textarea id="message" rows="4"></textarea>
-    <button type="submit">Send Quote Request</button>
+    <label for="message">Additional Details:</label>
+    <textarea name="message" id="message" rows="4" required></textarea>
+    <button type="submit">Send Invoice Request</button>
   </form>
+  <div id="formMessage" class="form-message"></div>
 </section>
 
 <section class="section" id="about">
@@ -221,6 +268,7 @@
   <p>At <strong>SYSNAB</strong>, we specialize in high-end computer and network systems, offering state-of-the-art technology solutions tailored to professionals, businesses, and institutions. Our mission is to bridge performance with reliability, providing the infrastructure that empowers seamless digital operations.</p>
   <p>We offer a wide array of products including structured cabling, routers, switches, PoE devices, CCTV cameras, inverters, batteries, and more. Whether you're setting up a smart workspace or building enterprise IT networks, SYSNAB ensures you get premium quality at competitive prices.</p>
   <p>With customer satisfaction at the core of our values, we deliver not just products, but trusted partnerships and dependable after-sales service. Join hundreds of satisfied clients and choose SYSNAB — where innovation meets reliability.</p>
+  <p>You can find our official distributor <strong>Alrefaq</strong> at <strong>Shop #16</strong> on the first level of the two-floor <strong>Zarqaa Alyamama 2</strong> compound, Janzur. The compound is known for being a hub for computer and network systems, making it easy for you to browse and compare. Just head to the first floor and ask for Alrefaq.</p>
 </section>
 
 <section class="section" id="contact">
@@ -229,6 +277,7 @@
   <p><strong>Phone 1:</strong> <a href="tel:+218912111091" style="color:#00cfff">+218912111091</a></p>
   <p><strong>Phone 2:</strong> <a href="tel:+218924111091" style="color:#00cfff">+218924111091</a></p>
   <p><strong>WhatsApp:</strong> <a href="https://wa.me/218924111091" target="_blank" style="color:#00cfff">Click to WhatsApp Us</a></p>
+  <iframe src="https://www.google.com/maps?q=V35R%2BJJ+Janzur&output=embed" width="100%" height="300" style="border:0;margin-top:20px;" allowfullscreen="" loading="lazy"></iframe>
 </section>
 
 <footer>
@@ -242,6 +291,159 @@
 </footer>
 
 <script>
+  // Language management
+  let isArabic = false;
+  const translations = {
+    "Home": "الرئيسية",
+    "Products": "المنتجات",
+    "Request Invoice": "طلب فاتورة",
+    "About": "عن الشركة",
+    "Contact": "اتصل بنا",
+    "Welcome to SYSNAB": "مرحباً بكم في SYSNAB",
+    "Your trusted partner in network and computer systems.": "شريككم الموثوق في أنظمة الشبكات والحواسيب.",
+    "Our Products": "منتجاتنا",
+    "Network Systems": "أنظمة الشبكات",
+    "Routers, switches, cables, and everything you need to build a reliable network.": "موجهات، مفاتيح، كابلات، وكل ما تحتاجه لبناء شبكة موثوقة.",
+    "Price:": "السعر:",
+    "Request a Quote": "طلب عرض سعر",
+    "Computer Systems": "أنظمة الحواسيب",
+    "Desktops, laptops, and servers tailored for performance and reliability.": "أجهزة سطح المكتب، أجهزة محمولة، وخوادم مصممة للأداء والموثوقية.",
+    "Accessories": "الملحقات",
+    "Keyboards, mice, and essential peripherals to complete your setup.": "لوحات المفاتيح، الفأرات، والملحقات الأساسية لإكمال إعدادك.",
+    "Request an Invoice": "طلب فاتورة",
+    "Name:": "الاسم:",
+    "Email:": "البريد الإلكتروني:",
+    "Phone Number:": "رقم الهاتف:",
+    "Product Interested In:": "المنتج المهتم به:",
+    "Additional Details:": "تفاصيل إضافية:",
+    "Send Invoice Request": "إرسال طلب الفاتورة",
+    "About SYSNAB": "عن SYSNAB",
+    "Contact Us": "اتصل بنا",
+    "WhatsApp Us": "راسلنا على واتساب",
+    "Click to WhatsApp Us": "انقر للتواصل عبر واتساب",
+    "All rights reserved.": "جميع الحقوق محفوظة.",
+    "Thank you for your invoice request! We will contact you shortly.": "شكراً لك على طلب الفاتورة! سنتواصل معك قريباً.",
+    "There was an error sending your request. Please try again later.": "حدث خطأ في إرسال طلبك. يرجى المحاولة مرة أخرى لاحقاً.",
+    "Invoice request sent successfully!": "تم إرسال طلب الفاتورة بنجاح!",
+    "Please fill all required fields.": "يرجى ملء جميع الحقول المطلوبة."
+  };
+
+  function toggleLanguage() {
+    isArabic = !isArabic;
+    document.querySelector('.language-toggle').textContent = isArabic ? 'English' : 'العربية';
+    translatePage();
+  }
+
+  function translatePage() {
+    const elementsToTranslate = document.querySelectorAll('h1, h2, h3, p, a:not(.whatsapp-float), label, button, nav a, footer a');
+    
+    elementsToTranslate.forEach(element => {
+      // Skip branding elements
+      if (element.closest('.logo-container') || element.textContent.includes('SYSNAB') || 
+          element.textContent.includes('Alrefaq') || element.textContent.includes('Zarqaa Alyamama')) {
+        return;
+      }
+      
+      const key = element.textContent.trim();
+      if (translations[key] && isArabic) {
+        element.textContent = translations[key];
+      } else if (!isArabic) {
+        // Revert to English - find the English key from the translation value
+        for (const [eng, ar] of Object.entries(translations)) {
+          if (element.textContent === ar) {
+            element.textContent = eng;
+            break;
+          }
+        }
+      }
+    });
+    
+    // Update placeholders
+    const inputs = document.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+      const placeholderKey = input.placeholder || input.getAttribute('data-original-placeholder');
+      if (placeholderKey && translations[placeholderKey]) {
+        if (isArabic) {
+          input.setAttribute('data-original-placeholder', placeholderKey);
+          input.placeholder = translations[placeholderKey];
+        } else {
+          input.placeholder = input.getAttribute('data-original-placeholder') || placeholderKey;
+        }
+      }
+    });
+  }
+
+  // Email functionality for invoice requests
+  document.getElementById('invoiceForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const product = document.getElementById('product').value;
+    const message = document.getElementById('message').value;
+    
+    // Simple validation
+    if (!name || !email || !phone || !message) {
+      showFormMessage(isArabic ? translations['Please fill all required fields.'] : 'Please fill all required fields.', 'error');
+      return;
+    }
+    
+    // Prepare email content
+    const subject = `New Invoice Request from ${name}`;
+    const body = `
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Product: ${product}
+Message: ${message}
+    `;
+    
+    // Send email using Formspree (free service)
+    fetch('https://formspree.io/f/xgegvnzb', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone,
+        product: product,
+        message: message,
+        _subject: subject
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        showFormMessage(isArabic ? translations['Invoice request sent successfully!'] : 'Invoice request sent successfully!', 'success');
+        document.getElementById('invoiceForm').reset();
+      } else {
+        throw new Error('Form submission failed');
+      }
+    })
+    .catch(error => {
+      showFormMessage(isArabic ? translations['There was an error sending your request. Please try again later.'] : 'There was an error sending your request. Please try again later.', 'error');
+    });
+  });
+
+  function requestQuote(product) {
+    document.getElementById('product').value = product;
+    document.getElementById('quote').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function showFormMessage(message, type) {
+    const messageElement = document.getElementById('formMessage');
+    messageElement.textContent = message;
+    messageElement.className = 'form-message ' + type;
+    messageElement.style.display = 'block';
+    
+    setTimeout(() => {
+      messageElement.style.display = 'none';
+    }, 5000);
+  }
+
+  // Slideshow functionality
   let currentSlide = 0;
   const slides = document.querySelectorAll('.slide');
   setInterval(() => {
@@ -250,6 +452,7 @@
     slides[currentSlide].classList.add('active');
   }, 5000);
 
+  // Scroll animations
   const sections = document.querySelectorAll('.section');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -260,6 +463,7 @@
   }, { threshold: 0.2 });
   sections.forEach(section => observer.observe(section));
 
+  // Navigation highlighting
   const navLinks = document.querySelectorAll('header nav a');
   window.addEventListener('scroll', () => {
     let scrollPos = window.scrollY + 100;
@@ -270,10 +474,6 @@
       }
     });
   });
-
-  function toggleLanguage() {
-    alert("Arabic translation feature coming soon!");
-  }
 </script>
 
 </body>
