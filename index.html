@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +10,7 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #1a1a1a;
       color: white;
+      scroll-behavior: smooth;
     }
     header {
       display: flex;
@@ -71,6 +71,11 @@
       opacity: 0;
       transition: opacity 1s ease;
     }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .slide.active {
       opacity: 1;
     }
@@ -124,13 +129,27 @@
       color: #aaa;
       font-size: 14px;
     }
+    .language-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #00cfff;
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 9999;
+    }
   </style>
 </head>
 <body>
 
+<div class="language-toggle" onclick="toggleLanguage()">AR</div>
+
 <header>
   <div class="logo-container">
-    <div style="background-color: #1a1a1a; padding: 5px; border-radius: 10px;"><img src="logo.png" alt="SYSNAB Logo" class="logo" style="background-color: transparent;" /></div>
+    <img src="logo.png" alt="SYSNAB Logo" class="logo" />
   </div>
   <nav>
     <a href="#home">Home</a>
@@ -145,9 +164,9 @@
   <h1>Welcome to SYSNAB</h1>
   <p>Your trusted partner in network and computer systems.</p>
   <div class="slideshow">
-    <div class="slide active"><h2>Reliable Network Solutions</h2></div>
-    <div class="slide"><h2>High-Performance Computers</h2></div>
-    <div class="slide"><h2>Premium Accessories</h2></div>
+    <div class="slide active"><img src="https://images.unsplash.com/photo-1581090700227-1e8e153fa0c7" alt="Cabling" /></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1618005198919-d3d4b5e03f8c" alt="Network Rack" /></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f" alt="Computer" /></div>
   </div>
 </section>
 
@@ -197,37 +216,29 @@
   </form>
 </section>
 
-
 <section class="section" id="about">
   <h2>About SYSNAB</h2>
-  <p>SYSNAB is a specialized provider of high-end networking systems and advanced computer solutions. 
-  With a strong focus on delivering reliable, scalable, and performance-driven systems, we cater to both 
-  businesses and individuals who demand the best in technology infrastructure.</p>
-  <p>Our product portfolio includes enterprise-grade routers, switches, structured cabling, data center equipment, 
-  professional workstations, high-performance PCs, and premium accessories. Whether you’re setting up a small office network 
-  or a large IT infrastructure, SYSNAB has the tools and expertise to support your vision.</p>
-  <p>We pride ourselves on combining top-tier quality with competitive pricing, ensuring that our customers always 
-  get the best value for their investment. Partner with SYSNAB and experience excellence in every connection.</p>
+  <p>At <strong>SYSNAB</strong>, we specialize in high-end computer and network systems, offering state-of-the-art technology solutions tailored to professionals, businesses, and institutions. Our mission is to bridge performance with reliability, providing the infrastructure that empowers seamless digital operations.</p>
+  <p>We offer a wide array of products including structured cabling, routers, switches, PoE devices, CCTV cameras, inverters, batteries, and more. Whether you're setting up a smart workspace or building enterprise IT networks, SYSNAB ensures you get premium quality at competitive prices.</p>
+  <p>With customer satisfaction at the core of our values, we deliver not just products, but trusted partnerships and dependable after-sales service. Join hundreds of satisfied clients and choose SYSNAB — where innovation meets reliability.</p>
 </section>
-    
 
 <section class="section" id="contact">
   <h2>Contact Us</h2>
   <p><strong>Email:</strong> <a href="mailto:infosysnab@gmail.com" style="color:#00cfff">infosysnab@gmail.com</a></p>
   <p><strong>Phone 1:</strong> <a href="tel:+218912111091" style="color:#00cfff">+218912111091</a></p>
   <p><strong>Phone 2:</strong> <a href="tel:+218924111091" style="color:#00cfff">+218924111091</a></p>
+  <p><strong>WhatsApp:</strong> <a href="https://wa.me/218924111091" target="_blank" style="color:#00cfff">Click to WhatsApp Us</a></p>
 </section>
 
 <footer>
   <p>&copy; 2025 SYSNAB. All rights reserved.</p>
-  
-<p>
-  <a href="mailto:infosysnab@gmail.com" style="color:#00cfff">infosysnab@gmail.com</a> |
-  <a href="https://wa.me/218924111091" target="_blank" style="color:#00cfff">WhatsApp</a> |
-  <a href="tel:+218912111091" style="color:#00cfff">+218912111091</a> |
-  <a href="tel:+218924111091" style="color:#00cfff">+218924111091</a>
-</p>
-
+  <p>
+    <a href="mailto:infosysnab@gmail.com" style="color:#00cfff">infosysnab@gmail.com</a> |
+    <a href="https://wa.me/218924111091" target="_blank" style="color:#00cfff">WhatsApp</a> |
+    <a href="tel:+218912111091" style="color:#00cfff">+218912111091</a> |
+    <a href="tel:+218924111091" style="color:#00cfff">+218924111091</a>
+  </p>
 </footer>
 
 <script>
@@ -259,6 +270,10 @@
       }
     });
   });
+
+  function toggleLanguage() {
+    alert("Arabic translation feature coming soon!");
+  }
 </script>
 
 </body>
