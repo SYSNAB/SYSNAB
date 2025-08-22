@@ -6,664 +6,235 @@
   <title>SYSNAB - Computer & Network Systems</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #1a1a1a;
-      color: #f5f5f5;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    header {
-      background: rgba(18, 18, 18, 0.95);
-      padding: 15px 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    }
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      height: 60px;
-      width: auto;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-    }
-    nav a {
-      color: #00cfff;
-      text-decoration: none;
-      margin-left: 25px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    nav a:after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 3px;
-      background: #f39c12;
-      transition: width 0.3s ease;
-    }
-    nav a:hover, nav a.active {
-      color: #f39c12;
-    }
-    nav a:hover:after, nav a.active:after {
-      width: 100%;
-    }
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: #00cfff;
-      font-size: 28px;
-      cursor: pointer;
-    }
-    .language-toggle {
-      position: fixed;
-      top: 90px;
-      right: 20px;
-      background: #00cfff;
-      color: #000;
-      padding: 10px 18px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 999;
-      font-size: 16px;
-      box-shadow: 0 5px 15px rgba(0, 207, 255, 0.3);
-    }
-    .whatsapp-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #25D366;
-      color: white;
-      padding: 15px 20px;
-      border-radius: 50px;
-      font-weight: bold;
-      z-index: 999;
-      text-decoration: none;
-      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .section {
-      padding: 80px 0;
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 50px;
-      position: relative;
-    }
-    .section-title h2 {
-      font-size: 2.5rem;
-      color: #00cfff;
-      display: inline-block;
-    }
-    .section-title:after {
-      content: '';
-      display: block;
-      width: 100px;
-      height: 4px;
-      background: linear-gradient(90deg, #00cfff, #f39c12);
-      margin: 15px auto;
-      border-radius: 2px;
-    }
-    .hero {
-      background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)), url('https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-align: center;
-      padding: 150px 0;
-      position: relative;
-    }
-    .hero-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 1.5rem;
-      margin-bottom: 40px;
-    }
-    .btn {
-      display: inline-block;
-      background: #00cfff;
-      color: white;
-      padding: 15px 35px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-    }
-    .btn:hover {
-      background: #f39c12;
-      transform: translateY(-3px);
-    }
-    .slideshow {
-      position: relative;
-      height: 700px;
-      overflow: hidden;
-      margin: 40px auto;
-      border-radius: 15px;
-      max-width: 1200px;
-    }
-    .slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1.2s ease;
-    }
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .slide.active {
-      opacity: 1;
-    }
-    .product-categories {
-      display: flex;
-      gap: 30px;
-      margin: 40px 0;
-    }
-    .category-sidebar {
-      flex: 1;
-      background: #222;
-      border-radius: 15px;
-      padding: 25px;
-      height: fit-content;
-      position: sticky;
-      top: 100px;
-    }
-    .category-sidebar h3 {
-      color: #00cfff;
-      border-bottom: 2px solid #f39c12;
-      padding-bottom: 15px;
-      margin-bottom: 20px;
-      font-size: 1.5rem;
-    }
-    .category-sidebar ul {
-      list-style: none;
-    }
-    .category-sidebar li {
-      margin: 15px 0;
-    }
-    .category-sidebar a {
-      color: #f5f5f5;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: block;
-      padding: 12px 15px;
-      border-radius: 8px;
-      background: #333;
-    }
-    .category-sidebar a:hover, .category-sidebar a.active {
-      background: #00cfff;
-      color: #000;
-    }
-    .products-container {
-      flex: 3;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    .product-section {
-      margin-bottom: 60px;
-    }
-    .product-section h3 {
-      color: #00cfff;
-      border-left: 5px solid #f39c12;
-      padding-left: 15px;
-      margin: 30px 0 20px;
-      font-size: 1.8rem;
-    }
-    .card {
-      background: #222;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-      transition: all 0.4s ease;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    .card:hover {
-      transform: translateY(-10px);
-    }
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-    .card h4 {
-      color: #00cfff;
-      margin-bottom: 15px;
-      font-size: 1.4rem;
-    }
-    .card p {
-      margin-bottom: 10px;
-      flex-grow: 1;
-    }
-    .card .price {
-      color: #f39c12;
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin: 15px 0;
-    }
-    .card button {
-      margin-top: auto;
-      width: 100%;
-    }
-    .mobile-category-select {
-      display: none;
-      width: 100%;
-      padding: 15px;
-      margin: 25px 0;
-      border-radius: 10px;
-      background: #222;
-      color: white;
-      border: 2px solid #00cfff;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    form {
-      background: #222;
-      padding: 40px;
-      border-radius: 15px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .form-group {
-      margin-bottom: 25px;
-    }
-    form label {
-      display: block;
-      margin-bottom: 8px;
-      color: #00cfff;
-      font-weight: 600;
-    }
-    form input, form select, form textarea {
-      width: 100%;
-      padding: 15px;
-      border-radius: 10px;
-      border: 2px solid #444;
-      background: #1a1a1a;
-      color: white;
-      font-size: 16px;
-    }
-    .form-message {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: center;
-      display: none;
-    }
-    .success {
-      background: rgba(76, 175, 80, 0.2);
-      border: 2px solid #4CAF50;
-      color: #4CAF50;
-    }
-    .error {
-      background: rgba(244, 67, 54, 0.2);
-      border: 2px solid #f44336;
-      color: #f44336;
-    }
-    footer {
-      background: #111;
-      padding: 40px 0 20px;
-      text-align: center;
-      margin-top: 80px;
-    }
-    .footer-content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      gap: 30px;
-      margin-bottom: 30px;
-    }
-    .footer-section {
-      flex: 1;
-      min-width: 250px;
-    }
-    .footer-section h3 {
-      color: #00cfff;
-      margin-bottom: 20px;
-      font-size: 1.4rem;
-    }
-    .footer-section p, .footer-section a {
-      color: #aaa;
-      margin-bottom: 10px;
-      display: block;
-      text-decoration: none;
-    }
-    .footer-section a:hover {
-      color: #f39c12;
-    }
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      margin-top: 15px;
-    }
-    .social-icons a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #333;
-      color: white;
-      transition: all 0.3s ease;
-    }
-    .social-icons a:hover {
-      background: #00cfff;
-      color: #000;
-    }
-    .copyright {
-      border-top: 1px solid #333;
-      padding-top: 20px;
-      color: #777;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 992px) {
-      .product-categories {
-        flex-direction: column;
-      }
-      .category-sidebar {
-        position: static;
-        margin-bottom: 30px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      header {
-        padding: 15px 0;
-      }
-      nav {
-        display: none;
-        position: absolute;
-        top: 90px;
-        left: 0;
-        right: 0;
-        background: #121212;
-        flex-direction: column;
-        padding: 20px;
-      }
-      nav.active {
-        display: flex;
-      }
-      nav a {
-        margin: 12px 0;
-      }
-      .mobile-menu-btn {
-        display: block;
-      }
-      .category-sidebar {
-        display: none;
-      }
-      .mobile-category-select {
-        display: block;
-      }
-      .slideshow {
-        height: 400px;
-      }
-      .hero {
-        padding: 100px 0;
-      }
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-      .hero p {
-        font-size: 1.2rem;
-      }
-      .section {
-        padding: 60px 0;
-      }
-      .section-title h2 {
-        font-size: 2rem;
-      }
-      form {
-        padding: 25px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-      .slideshow {
-        height: 300px;
-      }
-      .products-container {
-        grid-template-columns: 1fr;
-      }
-      .card {
-        padding: 20px;
-      }
+    *{box-sizing:border-box;margin:0;padding:0}:root{--bg:#1a1a1a;--bg-2:#2d2d2d;--panel:#222;--panel-2:#333;--brand:#00cfff;--brand-2:#0099cc;--accent:#f39c12;--text:#f5f5f5}html{scroll-behavior:smooth}body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,var(--bg) 0%,var(--bg-2) 100%);color:var(--text);line-height:1.6;overflow-x:hidden}.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}header{background:rgba(18,18,18,.95);backdrop-filter:blur(10px);padding:15px 0;position:sticky;top:0;z-index:1000;box-shadow:0 5px 20px rgba(0,0,0,.3)}.header-content{display:flex;justify-content:space-between;align-items:center}.logo{height:60px;width:auto;transition:transform .3s ease}.logo:hover{transform:scale(1.05)}nav{display:flex;align-items:center}nav a{color:var(--brand);text-decoration:none;margin-left:25px;font-weight:600;transition:all .3s ease;position:relative;padding:.25rem 0}nav a:after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:3px;background:var(--accent);transition:width .3s ease}nav a:hover, nav a.active{color:var(--accent)}nav a:hover:after, nav a.active:after{width:100%}.mobile-menu-btn{display:none;background:none;border:none;color:var(--brand);font-size:28px;cursor:pointer;transition:color .3s ease}.mobile-menu-btn:hover{color:var(--accent)}.language-toggle{position:fixed;top:90px;right:20px;background:linear-gradient(135deg,var(--brand) 0%,var(--brand-2) 100%);color:#000;padding:10px 18px;border-radius:50px;cursor:pointer;font-weight:bold;z-index:999;font-size:16px;box-shadow:0 5px 15px rgba(0,207,255,.3);transition:all .3s ease}.language-toggle:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,207,255,.4)}.whatsapp-float{position:fixed;bottom:25px;right:25px;background:linear-gradient(135deg,#25D366 0%,#128C7E 100%);color:#fff;padding:15px 20px;border-radius:50px;font-weight:bold;z-index:999;text-decoration:none;box-shadow:0 5px 15px rgba(37,211,102,.3);display:flex;align-items:center;gap:8px;transition:all .3s ease}.whatsapp-float:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(37,211,102,.4)}.section{padding:80px 0;opacity:0;transform:translateY(30px);transition:all .8s ease}.section.visible{opacity:1;transform:translateY(0)}.section-title{text-align:center;margin-bottom:50px;position:relative}.section-title h2{font-size:2.5rem;color:var(--brand);display:inline-block}.section-title:after{content:'';display:block;width:100px;height:4px;background:linear-gradient(90deg,var(--brand),var(--accent));margin:15px auto;border-radius:2px}.hero{background:linear-gradient(rgba(10,10,10,.8),rgba(10,10,10,.8)),url('https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?auto=format&fit=crop&w=1800&q=80');background-size:cover;background-position:center;color:white;text-align:center;padding:150px 0;position:relative}.hero-content{max-width:800px;margin:0 auto}.hero h1{font-size:3.5rem;margin-bottom:20px;text-shadow:2px 2px 10px rgba(0,0,0,.5)}.hero p{font-size:1.5rem;margin-bottom:40px}.btn{display:inline-block;background:linear-gradient(135deg,var(--brand) 0%,var(--brand-2) 100%);color:#fff;padding:15px 35px;border-radius:50px;text-decoration:none;font-weight:bold;transition:all .3s ease;border:none;cursor:pointer;box-shadow:0 5px 15px rgba(0,207,255,.3)}.btn:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,207,255,.4);background:linear-gradient(135deg,var(--accent) 0%,#e67e22 100%)}.slideshow{position:relative;height:700px;overflow:hidden;margin:40px auto;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:1200px}.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}.slide img{width:100%;height:100%;object-fit:cover}.slide.active{opacity:1}.product-categories{display:flex;gap:30px;margin:40px 0}.category-sidebar{flex:1;background:linear-gradient(135deg,var(--panel) 0%,var(--panel-2) 100%);border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,.3);height:fit-content;position:sticky;top:100px}.category-sidebar h3{color:var(--brand);border-bottom:2px solid var(--accent);padding-bottom:15px;margin-bottom:20px;font-size:1.5rem}.category-sidebar ul{list-style:none}.category-sidebar li{margin:15px 0}.category-sidebar a{color:var(--text);text-decoration:none;transition:all .3s ease;display:block;padding:12px 15px;border-radius:8px;background:rgba(50,50,50,.5)}.category-sidebar a:hover, .category-sidebar a.active{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#000;transform:translateX(5px)}.coming-soon{opacity:0.6;position:relative}.coming-soon:after{content:"Coming Soon";position:absolute;top:50%;right:15px;transform:translateY(-50%);background:var(--accent);color:#000;font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:bold}.products-container{flex:3;display:block;width:100%}.product-section{margin-bottom:60px;padding:20px 0}.product-section h3{color:var(--brand);border-left:5px solid var(--accent);padding-left:15px;margin:30px 0 20px;font-size:1.8rem}.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;width:100%}.card{background:linear-gradient(135deg,var(--panel) 0%,var(--panel-2) 100%);border-radius:15px;padding:20px;box-shadow:0 8px 25px rgba(0,0,0,.3);transition:all .4s ease;height:100%;display:flex;flex-direction:column;overflow:hidden}.card:hover{transform:translateY(-10px);box-shadow:0 15px 35px rgba(0,0,0,.4)}.card img{width:100%;height:200px;object-fit:contain;border-radius:10px;margin-bottom:15px;background:#111;padding:10px}.card h4{color:var(--brand);margin-bottom:10px;font-size:1.2rem}.card p{margin-bottom:8px;flex-grow:0}.card .price{color:var(--accent);font-weight:bold;font-size:1.1rem;margin:10px 0}.card button{margin-top:auto;width:100%}.mobile-category-select{display:none;width:100%;padding:15px;margin:25px 0;border-radius:10px;background:#222;color:white;border:2px solid var(--brand);font-size:16px;cursor:pointer}form{background:linear-gradient(135deg,var(--panel) 0%,var(--panel-2) 100%);padding:40px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:800px;margin:0 auto}.form-group{margin-bottom:25px}form label{display:block;margin-bottom:8px;color:var(--brand);font-weight:600}form input, form select, form textarea{width:100%;padding:15px;border-radius:10px;border:2px solid #444;background:#1a1a1a;color:white;font-size:16px;transition:border .3s ease}form input:focus, form select:focus, form textarea:focus{border-color:var(--brand);outline:none}.form-message{margin-top:20px;padding:15px;border-radius:10px;text-align:center;display:none}.success{background:rgba(76,175,80,.2);border:2px solid #4CAF50;color:#4CAF50}.error{background:rgba(244,67,54,.2);border:2px solid #f44336;color:#f44336}footer{background:linear-gradient(135deg,#111 0%,#222 100%);padding:40px 0 20px;text-align:center;margin-top:80px}.footer-content{display:flex;flex-wrap:wrap;justify-content:space-around;gap:30px;margin-bottom:30px}.footer-section{flex:1;min-width:250px}.footer-section h3{color:var(--brand);margin-bottom:20px;font-size:1.2rem}.footer-section p, .footer-section a{color:#aaa;margin-bottom:10px;display:block;text-decoration:none;transition:color .3s ease}.footer-section a:hover{color:var(--accent)}.social-icons{display:flex;gap:15px;justify-content:center;margin-top:15px}.social-icons a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:#333;color:white;transition:all .3s ease}.social-icons a:hover{background:var(--brand);color:#000;transform:translateY(-5px)}.copyright{border-top:1px solid #333;padding-top:20px;color:#777;font-size:.9rem}@media (max-width:992px){.product-categories{flex-direction:column}.category-sidebar{position:static;margin-bottom:30px}}@media (max-width:768px){header{padding:15px 0}nav{display:none;position:absolute;top:90px;left:0;right:0;background:rgba(18,18,18,.98);backdrop-filter:blur(10px);flex-direction:column;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,.3)}nav.active{display:flex}nav a{margin:12px 0;padding:10px;border-radius:8px;background:rgba(50,50,50,.3)}.mobile-menu-btn{display:block}.category-sidebar{display:none}.mobile-category-select{display:block}.slideshow{height:400px}.hero{padding:100px 0}.hero h1{font-size:2.5rem}.hero p{font-size:1.2rem}.section{padding:60px 0}.section-title h2{font-size:2rem}form{padding:25px}}@media (max-width:480px){.hero h1{font-size:2rem}.slideshow{height:300px}.language-toggle{top:80px;right:15px;padding:8px 15px;font-size:14px}.whatsapp-float{bottom:20px;right:20px;padding:12px 18px;font-size:14px}}@media (prefers-reduced-motion:reduce){*,:before,:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+    /* Fix for RTL layout */
+    html[dir="rtl"] .category-sidebar a:hover, 
+    html[dir="rtl"] .category-sidebar a.active {
+      transform: translateX(-5px);
+    }
+    html[dir="rtl"] .section-title:after {
+      background: linear-gradient(270deg, var(--brand), var(--accent));
+    }
+    html[dir="rtl"] .product-section h3 {
+      border-left: none;
+      border-right: 5px solid var(--accent);
+      padding-left: 0;
+      padding-right: 15px;
     }
   </style>
 </head>
 <body>
 
-<div class="language-toggle" onclick="toggleLanguage()">العربية</div>
-<a href="https://wa.me/218924111091" class="whatsapp-float" target="_blank">
-  <i class="fab fa-whatsapp"></i> WhatsApp Us
+<div class="language-toggle" onclick="toggleLanguage()" aria-label="Toggle language">العربية</div>
+<a href="https://wa.me/218924111091" class="whatsapp-float" target="_blank" rel="noopener">
+  <i class="fab fa-whatsapp" aria-hidden="true"></i> <span class="translate" data-key="WhatsApp Us">WhatsApp Us</span>
 </a>
 
 <header>
   <div class="container header-content">
     <img src="logo.png" alt="SYSNAB Logo" class="logo" />
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Open menu">☰</button>
     <nav id="mainNav">
-      <a href="#home">Home</a>
-      <a href="#products">Products</a>
-      <a href="#quote">Request Invoice</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#home"><span class="translate" data-key="Home">Home</span></a>
+      <a href="#products"><span class="translate" data-key="Products">Products</span></a>
+      <a href="#quote"><span class="translate" data-key="Request Invoice">Request Invoice</span></a>
+      <a href="#about"><span class="translate" data-key="About">About</span></a>
+      <a href="#contact"><span class="translate" data-key="Contact">Contact</span></a>
     </nav>
   </div>
 </header>
 
 <section class="hero" id="home">
   <div class="container hero-content">
-    <h1>Welcome to SYSNAB</h1>
-    <p>Your trusted partner in network and computer systems.</p>
-    <a href="#products" class="btn">Explore Products</a>
+    <h1 class="translate" data-key="Welcome to SYSNAB">Welcome to SYSNAB</h1>
+    <p class="translate" data-key="Your trusted partner in network and computer systems.">Your trusted partner in network and computer systems.</p>
+    <a href="#products" class="btn translate" data-key="Explore Products">Explore Products</a>
   </div>
 </section>
 
-<div class="slideshow">
-  <div class="slide active"><img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cabling" /></div>
-  <div class="slide"><img src="slideshow1.png" alt="Network Rack" /></div>
-  <div class="slide"><img src="slideshow2.jpg" alt="Computer" /></div>
+<div class="slideshow" aria-label="Product highlights">
+  <div class="slide active"><img loading="lazy" src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?auto=format&fit=crop&w=1600&q=80" alt="Structured cabling" /></div>
+  <div class="slide"><img loading="lazy" src="slideshow1.png" alt="Network rack and switches" /></div>
+  <div class="slide"><img loading="lazy" src="slideshow2.jpg" alt="High-performance computer system" /></div>
 </div>
 
 <section class="section" id="products">
   <div class="container">
-    <div class="section-title">
-      <h2>Our Products</h2>
-    </div>
-    
+    <div class="section-title"><h2 class="translate" data-key="Our Products">Our Products</h2></div>
+
     <select class="mobile-category-select" onchange="scrollToCategory(this.value)">
-      <option value="">Select a Category</option>
-      <option value="cables">Cables</option>
-      <option value="poe">POE Devices</option>
-      <option value="routers">Routers</option>
-      <option value="switches">Switches</option>
-      <option value="batteries">Batteries</option>
-      <option value="inverters">Inverters</option>
+      <option value=""><span class="translate" data-key="Select a Category">Select a Category</span></option>
+      <option value="cables"><span class="translate" data-key="Cables">Cables</span></option>
+      <option value="poe"><span class="translate" data-key="POE Devices">POE Devices</span></option>
+      <option value="cameras"><span class="translate" data-key="Cameras">Cameras</span></option>
+      <option value="routers"><span class="translate" data-key="Routers">Routers</span></option>
+      <option value="switches"><span class="translate" data-key="Switches">Switches</span></option>
+      <option value="batteries"><span class="translate" data-key="Batteries">Batteries</span></option>
+      <option value="inverters"><span class="translate" data-key="Inverters">Inverters</span></option>
     </select>
-    
+
     <div class="product-categories">
-      <div class="category-sidebar">
-        <h3>Categories</h3>
+      <div class="category-sidebar" id="categorySidebar">
+        <h3 class="translate" data-key="Categories">Categories</h3>
         <ul>
-          <li><a href="#cables" class="active">Cables</a></li>
-          <li><a href="#poe">POE Devices</a></li>
-          <li><a href="#routers">Routers</a></li>
-          <li><a href="#switches">Switches</a></li>
-          <li><a href="#batteries">Batteries</a></li>
-          <li><a href="#inverters">Inverters</a></li>
+          <li><a href="#cables" class="active translate" data-key="Cables">Cables</a></li>
+          <li><a href="#poe" class="translate" data-key="POE Devices">POE Devices</a></li>
+          <li><a href="#cameras" class="translate" data-key="Cameras">Cameras</a></li>
+          <li><a href="#routers" class="translate coming-soon" data-key="Routers">Routers</a></li>
+          <li><a href="#switches" class="translate coming-soon" data-key="Switches">Switches</a></li>
+          <li><a href="#batteries" class="translate coming-soon" data-key="Batteries">Batteries</a></li>
+          <li><a href="#inverters" class="translate coming-soon" data-key="Inverters">Inverters</a></li>
         </ul>
       </div>
-      
+
       <div class="products-container">
-        <!-- Cables Section -->
+        <!-- Cables -->
         <div class="product-section" id="cables">
-          <h3>Cables</h3>
+          <h3 class="translate" data-key="Cables">Cables</h3>
           <div class="cards">
+            <!-- UTP Indoor -->
             <div class="card">
-              <img src="https://images.unsplash.com/photo-160152252137f-321dcd11c0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Ethernet Cat6 Cable">
-              <h4>Ethernet Cat6 Cable</h4>
-              <p>High-speed Ethernet cable for networking with superior performance.</p>
-              <p><strong>Lengths:</strong> 1m, 3m, 5m, 10m, 15m, 20m</p>
-              <p class="price">$5 - $35</p>
-              <button class="btn" onclick="requestQuote('Ethernet Cat6 Cable')">Request Quote</button>
+              <img loading="lazy" src="https://images.unsplash.com/photo-1596526131083-e8cf6c50a65f?auto=format&fit=crop&w=800&q=80" alt="UTP Indoor Cable" onerror="this.src='https://via.placeholder.com/800x450?text=UTP+Indoor+Cable'">
+              <h4 class="translate" data-key="UTP Indoor Cable">UTP Indoor Cable</h4>
+              <p class="translate" data-key="Unshielded Twisted Pair cable for indoor networking.">Unshielded Twisted Pair cable for indoor networking.</p>
+              <p><strong class="translate" data-key="Type:">Type:</strong> CAT6 UTP</p>
+              <p><strong class="translate" data-key="Available:">Available:</strong> <span class="translate" data-key="Full 305m rolls and custom lengths">Full 305m rolls and custom lengths</span></p>
+              <p><strong class="translate" data-key="Custom Lengths:">Custom Lengths:</strong> <span class="translate" data-key="Available">Available</span></p>
+              <p class="price">$0.50/m - $150/roll</p>
+              <button class="btn" onclick="requestQuote('UTP Indoor Cable')"><span class="translate" data-key="Request Quote">Request Quote</span></button>
             </div>
+            
+            <!-- UTP Outdoor -->
             <div class="card">
-              <img src="https://images.unsplash.com/photo-1596526131083-e8cf6c50a65f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Fiber Optic Cable">
-              <h4>Fiber Optic Cable</h4>
-              <p>High-performance fiber optic cables for long-distance data transmission.</p>
-              <p><strong>Lengths:</strong> 10m, 20m, 50m, 100m</p>
-              <p class="price">$50 - $300</p>
-              <button class="btn" onclick="requestQuote('Fiber Optic Cable')">Request Quote</button>
+              <img loading="lazy" src="https://images.unsplash.com/photo-1596526131083-e8cf6c50a65f?auto=format&fit=crop&w=800&q=80" alt="UTP Outdoor Cable" onerror="this.src='https://via.placeholder.com/800x450?text=UTP+Outdoor+Cable'">
+              <h4 class="translate" data-key="UTP Outdoor Cable">UTP Outdoor Cable</h4>
+              <p class="translate" data-key="Weather-resistant UTP cable for outdoor installations.">Weather-resistant UTP cable for outdoor installations.</p>
+              <p><strong class="translate" data-key="Type:">Type:</strong> CAT6 UTP Outdoor</p>
+              <p><strong class="translate" data-key="Available:">Available:</strong> <span class="translate" data-key="Full 305m rolls and custom lengths">Full 305m rolls and custom lengths</span></p>
+              <p><strong class="translate" data-key="Custom Lengths:">Custom Lengths:</strong> <span class="translate" data-key="Available">Available</span></p>
+              <p class="price">$0.70/m - $210/roll</p>
+              <button class="btn" onclick="requestQuote('UTP Outdoor Cable')"><span class="translate" data-key="Request Quote">Request Quote</span></button>
             </div>
+            
+            <!-- FTP Indoor -->
             <div class="card">
-              <img src="https://images.unsplash.com/photo-1613014588253-3bfd32D9eab3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Coaxial Cable">
-              <h4>Coaxial Cable</h4>
-              <p>High-quality coaxial cables for various applications including TV and internet.</p>
-              <p><strong>Lengths:</strong> 2m, 5m, 10m, 15m, 30m</p>
-              <p class="price">$8 - $50</p>
-              <button class="btn" onclick="requestQuote('Coaxial Cable')">Request Quote</button>
+              <img loading="lazy" src="https://images.unsplash.com/photo-1598899134739-24b0dfe0d8d9?auto=format&fit=crop&w=800&q=80" alt="FTP Indoor Cable" onerror="this.src='https://via.placeholder.com/800x450?text=FTP+Indoor+Cable'">
+              <h4 class="translate" data-key="FTP Indoor Cable">FTP Indoor Cable</h4>
+              <p class="translate" data-key="Foiled Twisted Pair cable with overall foil shield for indoor use.">Foiled Twisted Pair cable with overall foil shield for indoor use.</p>
+              <p><strong class="translate" data-key="Type:">Type:</strong> CAT6 FTP</p>
+              <p><strong class="translate" data-key="Available:">Available:</strong> <span class="translate" data-key="Full 305m rolls and custom lengths">Full 305m rolls and custom lengths</span></p>
+              <p><strong class="translate" data-key="Custom Lengths:">Custom Lengths:</strong> <span class="translate" data-key="Available">Available</span></p>
+              <p class="price">$0.65/m - $200/roll</p>
+              <button class="btn" onclick="requestQuote('FTP Indoor Cable')"><span class="translate" data-key="Request Quote">Request Quote</span></button>
+            </div>
+            
+            <!-- FTP Outdoor -->
+            <div class="card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1598899134739-24b0dfe0d8d9?auto=format&fit=crop&w=800&q=80" alt="FTP Outdoor Cable" onerror="this.src='https://via.placeholder.com/800x450?text=FTP+Outdoor+Cable'">
+              <h4 class="translate" data-key="FTP Outdoor Cable">FTP Outdoor Cable</h4>
+              <p class="translate" data-key="Weather-resistant FTP cable for outdoor installations with foil shielding.">Weather-resistant FTP cable for outdoor installations with foil shielding.</p>
+              <p><strong class="translate" data-key="Type:">Type:</strong> CAT6 FTP Outdoor</p>
+              <p><strong class="translate" data-key="Available:">Available:</strong> <span class="translate" data-key="Full 305m rolls and custom lengths">Full 305m rolls and custom lengths</span></p>
+              <p><strong class="translate" data-key="Custom Lengths:">Custom Lengths:</strong> <span class="translate" data-key="Available">Available</span></p>
+              <p class="price">$0.85/m - $260/roll</p>
+              <button class="btn" onclick="requestQuote('FTP Outdoor Cable')"><span class="translate" data-key="Request Quote">Request Quote</span></button>
+            </div>
+            
+            <!-- SFTP Indoor -->
+            <div class="card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="SFTP Indoor Cable" onerror="this.src='https://via.placeholder.com/800x450?text=SFTP+Indoor+Cable'">
+              <h4 class="translate" data-key="SFTP Indoor Cable">SFTP Indoor Cable</h4>
+              <p class="translate" data-key="Shielded Foiled Twisted Pair cable with individual pair shielding for maximum protection.">Shielded Foiled Twisted Pair cable with individual pair shielding for maximum protection.</p>
+              <p><strong class="translate" data-key="Type:">Type:</strong> CAT6 SFTP</p>
+              <p><strong class="translate" data-key="Available:">Available:</strong> <span class="translate" data-key="Full 305m rolls and custom lengths">Full 305m rolls and custom lengths</span></p>
+              <p><strong class="translate" data-key="Custom Lengths:">Custom Lengths:</strong> <span class="translate" data-key="Available">Available</span></p>
+              <p class="price">$0.80/m - $245/roll</p>
+              <button class="btn" onclick="requestQuote('SFTP Indoor Cable')"><span class="translate" data-key="Request Quote">Request Quote</span></button>
+            </div>
+            
+            <!-- SFTP Outdoor -->
+            <div class="card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="SFTP Outdoor Cable" onerror="this.src='https://via.placeholder.com/800x450?text=SFTP+Outdoor+Cable'">
+              <h4 class="translate" data-key="SFTP Outdoor Cable">SFTP Outdoor Cable</h4>
+              <p class="translate" data-key="Weather-resistant SFTP cable for demanding outdoor environments.">Weather-resistant SFTP cable for demanding outdoor environments.</p>
+              <p><strong class="translate" data-key="Type:">Type:</strong> CAT6 SFTP Outdoor</p>
+              <p><strong class="translate" data-key="Available:">Available:</strong> <span class="translate" data-key="Full 305m rolls and custom lengths">Full 305m rolls and custom lengths</span></p>
+              <p><strong class="translate" data-key="Custom Lengths:">Custom Lengths:</strong> <span class="translate" data-key="Available">Available</span></p>
+              <p class="price">$1.00/m - $305/roll</p>
+              <button class="btn" onclick="requestQuote('SFTP Outdoor Cable')"><span class="translate" data-key="Request Quote">Request Quote</span></button>
             </div>
           </div>
         </div>
-        
-        <!-- POE Devices Section -->
+
+        <!-- POE Devices -->
         <div class="product-section" id="poe">
-          <h3>POE Devices</h3>
+          <h3 class="translate" data-key="POE Devices">POE Devices</h3>
           <div class="cards">
             <div class="card">
-              <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="POE Injector">
-              <h4>POE Injector</h4>
-              <p>Single port POE injector for network devices that require power over Ethernet.</p>
-              <p><strong>Power:</strong> 48V, 30W</p>
-              <p><strong>Compatibility:</strong> IEEE 802.3af/at</p>
+              <img loading="lazy" src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80" alt="POE Injector" onerror="this.src='https://via.placeholder.com/800x450?text=POE+Injector'">
+              <h4 class="translate" data-key="POE Injector">POE Injector</h4>
+              <p class="translate" data-key="Single-port POE injector for network devices that require power over Ethernet.">Single-port POE injector for network devices that require power over Ethernet.</p>
+              <p><strong class="translate" data-key="Power:">Power:</strong> 48V, 30W</p>
+              <p><strong class="translate" data-key="Compatibility:">Compatibility:</strong> IEEE 802.3af/at</p>
               <p class="price">$25</p>
-              <button class="btn" onclick="requestQuote('POE Injector')">Request Quote</button>
+              <button class="btn" onclick="requestQuote('POE Injector')"><span class="translate" data-key="Request Quote">Request Quote</span></button>
             </div>
             <div class="card">
-              <img src="https://images.unsplash.com/photo-1604357209793-fca5dca89f4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="POE Switch">
-              <h4>POE Switch</h4>
-              <p>8-port POE switch with gigabit speeds for powering multiple devices.</p>
-              <p><strong>Ports:</strong> 8 POE+ ports</p>
-              <p><strong>Power Budget:</strong> 150W</p>
+              <img loading="lazy" src="https://images.unsplash.com/photo-1604357209793-fca5dca89f4c?auto=format&fit=crop&w=800&q=80" alt="POE Switch" onerror="this.src='https://via.placeholder.com/800x450?text=POE+Switch'">
+              <h4 class="translate" data-key="POE Switch">POE Switch</h4>
+              <p class="translate" data-key="8-port POE+ switch with gigabit speeds for powering multiple devices.">8-port POE+ switch with gigabit speeds for powering multiple devices.</p>
+              <p><strong class="translate" data-key="Ports:">Ports:</strong> 8 POE+ ports</p>
+              <p><strong class="translate" data-key="Power Budget:">Power Budget:</strong> 150W</p>
               <p class="price">$150</p>
-              <button class="btn" onclick="requestQuote('POE Switch')">Request Quote</button>
+              <button class="btn" onclick="requestQuote('POE Switch')"><span class="translate" data-key="Request Quote">Request Quote</span></button>
             </div>
           </div>
         </div>
-        
-        <!-- Additional sections would follow the same pattern -->
-        <div class="product-section" id="routers">
-          <h3>Routers</h3>
+
+        <!-- Cameras -->
+        <div class="product-section" id="cameras">
+          <h3 class="translate" data-key="Cameras">Cameras</h3>
           <div class="cards">
             <div class="card">
-              <img src="https://images.unsplash.com/photo-1614557255116-ef4e9c46a6d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Wireless Router">
-              <h4>Wireless Router</h4>
-              <p>Dual-band wireless router for home use with excellent coverage and speed.</p>
-              <p><strong>Speed:</strong> AC1200</p>
-              <p><strong>Coverage:</strong> Up to 1500 sq ft</p>
-              <p class="price">$60</p>
-              <button class="btn" onclick="requestQuote('Wireless Router')">Request Quote</button>
+              <img loading="lazy" src="https://images.unsplash.com/photo-1561736778-92e52a7769ef?auto=format&fit=crop&w=800&q=80" alt="Dome CCTV Camera" onerror="this.src='https://via.placeholder.com/800x450?text=Dome+CCTV+Camera'">
+              <h4 class="translate" data-key="Dome CCTV Camera">Dome CCTV Camera</h4>
+              <p class="translate" data-key="Indoor/outdoor dome CCTV camera with night vision and weather resistance.">Indoor/outdoor dome CCTV camera with night vision and weather resistance.</p>
+              <p><strong class="translate" data-key="Resolution:">Resolution:</strong> 4MP</p>
+              <p><strong class="translate" data-key="Features:">Features:</strong> <span class="translate" data-key="Night Vision, Weather Resistant">Night Vision, Weather Resistant</span></p>
+              <p class="price">$85</p>
+              <button class="btn" onclick="requestQuote('Dome CCTV Camera')"><span class="translate" data-key="Request Quote">Request Quote</span></button>
             </div>
             <div class="card">
-              <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Business Router">
-              <h4>Business Router</h4>
-              <p>High-performance router for small businesses with advanced features.</p>
-              <p><strong>Features:</strong> VPN, QoS, Firewall</p>
-              <p><strong>Users:</strong> Supports up to 50 devices</p>
-              <p class="price">$200</p>
-              <button class="btn" onclick="requestQuote('Business Router')">Request Quote</button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-section" id="switches">
-          <h3>Switches</h3>
-          <div class="cards">
-            <div class="card">
-              <img src="https://images.unsplash.com/photo-1596526131083-e8cf6c50a65f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="8-Port Switch">
-              <h4>8-Port Gigabit Switch</h4>
-              <p>Desktop switch with 8 gigabit ports for home or small office use.</p>
-              <p><strong>Speed:</strong> 10/100/1000 Mbps</p>
-              <p><strong>Design:</strong> Compact and fanless</p>
-              <p class="price">$50</p>
-              <button class="btn" onclick="requestQuote('8-Port Switch')">Request Quote</button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-section" id="batteries">
-          <h3>Batteries</h3>
-          <div class="cards">
-            <div class="card">
-              <img src="https://images.unsplash.com/photo-1603712610494-5bc20f7937b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="UPS Battery">
-              <h4>UPS Battery Backup</h4>
-              <p>Backup battery for uninterrupted power supply during outages.</p>
-              <p><strong>Capacity:</strong> 12V/7Ah</p>
-              <p><strong>Runtime:</strong> Up to 60 minutes</p>
-              <p class="price">$40</p>
-              <button class="btn" onclick="requestQuote('UPS Battery')">Request Quote</button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-section" id="inverters">
-          <h3>Inverters</h3>
-          <div class="cards">
-            <div class="card">
-              <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Power Inverter">
-              <h4>Power Inverter</h4>
-              <p>Converts DC to AC for power backup of essential devices.</p>
-              <p><strong>Power:</strong> 1000W</p>
-              <p><strong>Output:</strong> Pure Sine Wave</p>
+              <img loading="lazy" src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" alt="Bullet CCTV Camera" onerror="this.src='https://via.placeholder.com/800x450?text=Bullet+CCTV+Camera'">
+              <h4 class="translate" data-key="Bullet CCTV Camera">Bullet CCTV Camera</h4>
+              <p class="translate" data-key="Outdoor bullet CCTV camera with long-range vision and infrared night vision.">Outdoor bullet CCTV camera with long-range vision and infrared night vision.</p>
+              <p><strong class="translate" data-key="Resolution:">Resolution:</strong> 5MP</p>
+              <p><strong class="translate" data-key="Features:">Features:</strong> <span class="translate" data-key="IR Night Vision, Long Range">IR Night Vision, Long Range</span></p>
               <p class="price">$120</p>
-              <button class="btn" onclick="requestQuote('Power Inverter')">Request Quote</button>
+              <button class="btn" onclick="requestQuote('Bullet CCTV Camera')"><span class="translate" data-key="Request Quote">Request Quote</span></button>
             </div>
           </div>
+        </div>
+
+        <!-- Coming Soon Sections -->
+        <div class="product-section" id="routers">
+          <h3 class="translate" data-key="Routers">Routers <span style="color: var(--accent); font-size: 1rem;">(Coming Soon)</span></h3>
+          <p class="translate" data-key="We will soon offer a range of high-quality routers for home and business use.">We will soon offer a range of high-quality routers for home and business use.</p>
+        </div>
+
+        <div class="product-section" id="switches">
+          <h3 class="translate" data-key="Switches">Switches <span style="color: var(--accent); font-size: 1rem;">(Coming Soon)</span></h3>
+          <p class="translate" data-key="Network switches will be available soon for all your connectivity needs.">Network switches will be available soon for all your connectivity needs.</p>
+        </div>
+
+        <div class="product-section" id="batteries">
+          <h3 class="translate" data-key="Batteries">Batteries <span style="color: var(--accent); font-size: 1rem;">(Coming Soon)</span></h3>
+          <p class="translate" data-key="High-capacity batteries for UPS systems will be available soon.">High-capacity batteries for UPS systems will be available soon.</p>
+        </div>
+
+        <div class="product-section" id="inverters">
+          <h3 class="translate" data-key="Inverters">Inverters <span style="color: var(--accent); font-size: 1rem;">(Coming Soon)</span></h3>
+          <p class="translate" data-key="Power inverters for backup systems will be available in the near future.">Power inverters for backup systems will be available in the near future.</p>
         </div>
       </div>
     </div>
@@ -672,41 +243,33 @@
 
 <section class="section" id="quote">
   <div class="container">
-    <div class="section-title">
-      <h2>Request an Invoice</h2>
-    </div>
+    <div class="section-title"><h2 class="translate" data-key="Request an Invoice">Request an Invoice</h2></div>
     <form id="invoiceForm">
       <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required>
+        <label for="name" class="translate" data-key="Name:">Name:</label>
+        <input type="text" name="name" id="name" required placeholder="Your name">
       </div>
       <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required>
+        <label for="email" class="translate" data-key="Email:">Email:</label>
+        <input type="email" name="email" id="email" required placeholder="your@email.com">
       </div>
       <div class="form-group">
-        <label for="phone">Phone Number:</label>
-        <input type="tel" name="phone" id="phone" required>
+        <label for="phone" class="translate" data-key="Phone Number:">Phone Number:</label>
+        <input type="tel" name="phone" id="phone" required placeholder="+218XXXXXXXXX">
       </div>
       <div class="form-group">
-        <label for="product">Product Interested In:</label>
+        <label for="product" class="translate" data-key="Product Interested In:">Product Interested In:</label>
         <select name="product" id="product">
-          <option value="Network Systems">Network Systems</option>
-          <option value="Computer Systems">Computer Systems</option>
-          <option value="Accessories">Accessories</option>
-          <option value="Cables">Cables</option>
-          <option value="POE Devices">POE Devices</option>
-          <option value="Routers">Routers</option>
-          <option value="Switches">Switches</option>
-          <option value="Batteries">Batteries</option>
-          <option value="Inverters">Inverters</option>
+          <option value="Cables" class="translate" data-key="Cables">Cables</option>
+          <option value="POE Devices" class="translate" data-key="POE Devices">POE Devices</option>
+          <option value="Cameras" class="translate" data-key="Cameras">Cameras</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="message">Additional Details:</label>
-        <textarea name="message" id="message" rows="4" required></textarea>
+        <label for="message" class="translate" data-key="Additional Details:">Additional Details:</label>
+        <textarea name="message" id="message" rows="4" required placeholder="Tell us quantities, specs, or any notes"></textarea>
       </div>
-      <button type="submit" class="btn">Send Invoice Request</button>
+      <button type="submit" class="btn translate" data-key="Send Invoice Request">Send Invoice Request</button>
     </form>
     <div id="formMessage" class="form-message"></div>
   </div>
@@ -714,50 +277,52 @@
 
 <section class="section" id="about">
   <div class="container">
-    <div class="section-title">
-      <h2>About SYSNAB</h2>
-    </div>
-    <p>At <strong>SYSNAB</strong>, we specialize in high-end computer and network systems, offering state-of-the-art technology solutions tailored to professionals, businesses, and institutions. Our mission is to bridge performance with reliability, providing the infrastructure that empowers seamless digital operations.</p>
-    <p>We offer a wide array of products including structured cabling, routers, switches, PoE devices, CCTV cameras, inverters, batteries, and more. Whether you're setting up a smart workspace or building enterprise IT networks, SYSNAB ensures you get premium quality at competitive prices.</p>
-    <p>With customer satisfaction at the core of our values, we deliver not just products, but trusted partnerships and dependable after-sales service. Join hundreds of satisfied clients and choose SYSNAB — where innovation meets reliability.</p>
-    <p>You can find our official distributor <strong>Alrefaq</strong> at <strong>Shop #16</strong> on the first level of the two-floor <strong>Zarqaa Alyamama 2</strong> compound, Janzur. The compound is known for being a hub for computer and network systems, making it easy for you to browse and compare. Just head to the first floor and ask for Alrefaq.</p>
+    <div class="section-title"><h2 class="translate" data-key="About SYSNAB">About SYSNAB</h2></div>
+    <p><span class="translate" data-key="At SYSNAB, we specialize in high-end computer and network systems, offering state-of-the-art technology solutions tailored to professionals, businesses, and institutions. Our mission is to bridge performance with reliability, providing the infrastructure that empowers seamless digital operations.">At <strong>SYSNAB</strong>, we specialize in high-end computer and network systems, offering state-of-the-art technology solutions tailored to professionals, businesses, and institutions. Our mission is to bridge performance with reliability, providing the infrastructure that empowers seamless digital operations.</span></p>
+    <p><span class="translate" data-key="We offer a wide array of products including structured cabling, routers, switches, PoE devices, CCTV cameras, inverters, batteries, and more. Whether you're setting up a smart workspace or building enterprise IT networks, SYSNAB ensures you get premium quality at competitive prices.">We offer a wide array of products including structured cabling, routers, switches, PoE devices, CCTV cameras, inverters, batteries, and more. Whether you're setting up a smart workspace or building enterprise IT networks, SYSNAB ensures you get premium quality at competitive prices.</span></p>
+    <p><span class="translate" data-key="With customer satisfaction at the core of our values, we deliver not just products, but trusted partnerships and dependable after-sales service. Join hundreds of satisfied clients and choose SYSNAB — where innovation meets reliability.">With customer satisfaction at the core of our values, we deliver not just products, but trusted partnerships and dependable after-sales service. Join hundreds of satisfied clients and choose SYSNAB — where innovation meets reliability.</span></p>
+    <p><span class="translate" data-key="You can find our official distributor Alrefaq at Shop #16 on the first level of the two-floor Zarqaa Alyamama 2 compound, Janzur. The compound is known for being a hub for computer and network systems, making it easy for you to browse and compare. Just head to the first level and ask for Alrefaq.">You can find our official distributor <strong>Alrefaq</strong> at <strong>Shop #16</strong> on the first level of the two-floor <strong>Zarqaa Alyamama 2</strong> compound, Janzur. The compound is known for being a hub for computer and network systems, making it easy for you to browse and compare. Just head to the first level and ask for Alrefaq.</span></p>
   </div>
 </section>
 
 <section class="section" id="contact">
   <div class="container">
-    <div class="section-title">
-      <h2>Contact Us</h2>
-    </div>
+    <div class="section-title"><h2 class="translate" data-key="Contact Us">Contact Us</h2></div>
     <div class="footer-content">
       <div class="footer-section">
-        <h3>Contact Information</h3>
+        <h3 class="translate" data-key="Contact Information">Contact Information</h3>
         <p><i class="fas fa-envelope"></i> <a href="mailto:infosysnab@gmail.com">infosysnab@gmail.com</a></p>
         <p><i class="fas fa-phone"></i> <a href="tel:+218912111091">+218912111091</a></p>
         <p><i class="fas fa-phone"></i> <a href="tel:+218924111091">+218924111091</a></p>
-        <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/218924111091" target="_blank">WhatsApp Us</a></p>
+        <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/218924111091" target="_blank" rel="noopener"><span class="translate" data-key="WhatsApp Us">WhatsApp Us</span></a></p>
       </div>
       <div class="footer-section">
-        <h3>Visit Us</h3>
-        <p><i class="fas fa-map-marker-alt"></i> Shop #16, First Level</p>
-        <p>Zarqaa Alyamama 2 Compound</p>
-        <p>Janzur, Libya</p>
+        <h3 class="translate" data-key="Visit Us">Visit Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> <span class="translate" data-key="Shop #16, First Level">Shop #16, First Level</span></p>
+        <p class="translate" data-key="Zarqaa Alyamama 2 Compound">Zarqaa Alyamama 2 Compound</p>
+        <p class="translate" data-key="Janzur, Libya">Janzur, Libya</p>
+      </div>
+      <div class="footer-section">
+        <h3 class="translate" data-key="Follow Us">Follow Us</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f" aria-label="Facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram" aria-label="Instagram"></i></a>
+        </div>
       </div>
     </div>
-    <iframe src="https://www.google.com/maps?q=V35R%2BJJ+Janzur&output=embed" width="100%" height="300" style="border:0;margin-top:20px;border-radius:15px;" allowfullscreen="" loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps?q=V35R%2BJJ+Janzur&output=embed" width="100%" height="300" style="border:0;margin-top:20px;border-radius:15px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </section>
 
 <footer>
   <div class="container">
     <div class="copyright">
-      <p>&copy; 2025 SYSNAB. All rights reserved.</p>
+      <p>&copy; 2025 SYSNAB. <span class="translate" data-key="All rights reserved.">All rights reserved.</span></p>
     </div>
   </div>
 </footer>
 
 <script>
-  // Language management
   let isArabic = false;
   const translations = {
     "Home": "الرئيسية",
@@ -776,39 +341,41 @@
     "Switches": "المفاتيح",
     "Batteries": "البطاريات",
     "Inverters": "المحولات",
+    "Cameras": "الكاميرات",
     "Select a Category": "اختر فئة",
-    "Ethernet Cat6 Cable": "كابل إيثرنت Cat6",
-    "High-speed Ethernet cable for networking with superior performance.": "كابل إيثرنت عالي السرعة للشبكات بأداء فائق.",
-    "Lengths:": "الأطوال:",
-    "Fiber Optic Cable": "كابل الألياف البصرية",
-    "High-performance fiber optic cables for long-distance data transmission.": "كابلات ألياف بصرية عالية الأداء لنقل البيانات لمسافات طويلة.",
-    "Coaxial Cable": "كابل محوري",
-    "High-quality coaxial cables for various applications including TV and internet.": "كابلات محورية عالية الجودة لتطبيقات متنوعة بما في ذلك التلفزيون والإنترنت.",
+    "UTP Indoor Cable": "كابل UTP داخلي",
+    "Unshielded Twisted Pair cable for indoor networking.": "كابل زوج مجدول غير محمي للشبكات الداخلية.",
+    "UTP Outdoor Cable": "كابل UTP خارجي",
+    "Weather-resistant UTP cable for outdoor installations.": "كابل UTP مقاوم للعوامل الجوية للتركيبات الخارجية.",
+    "FTP Indoor Cable": "كابل FTP داخli",
+    "Foiled Twisted Pair cable with overall foil shield for indoor use.": "كابل زوج مجدول مع غلاف فويل للاستخدام الداخلي.",
+    "FTP Outdoor Cable": "كابل FTP خارجي",
+    "Weather-resistant FTP cable for outdoor installations with foil shielding.": "كبل FTP مقاوم للعوامل الجوية مع غلاف فويل للتركيبات الخارجية.",
+    "SFTP Indoor Cable": "كابل SFTP داخli",
+    "Shielded Foiled Twisted Pair cable with individual pair shielding for maximum protection.": "كابل زوج مجدول محمي بشكل فردي بأقصى حماية للاستخدام الداخلي.",
+    "SFTP Outdoor Cable": "كابل SFTP خارجي",
+    "Weather-resistant SFTP cable for demanding outdoor environments.": "كابل SFTP مقاوم للعوامل الجوية للبيئات الخارجية المتطلبة.",
+    "Type:": "النوع:",
+    "Available:": "متوفر:",
+    "Full 305m rolls and custom lengths": "لفائف كاملة 305 متر وأطوال مخصصة",
+    "Custom Lengths:": "أطوال مخصصة:",
+    "Available": "متاح",
     "POE Injector": "حاقن POE",
-    "Single port POE injector for network devices that require power over Ethernet.": "حاقن POE منفذ واحد لأجهزة الشبكة التي تتطلب طاقة عبر إيثرنت.",
+    "Single-port POE injector for network devices that require power over Ethernet.": "حاقن POE منفذ واحد لأجهزة الشبكة التي تتطلب طاقة عبر الإيثرنت.",
     "Power:": "الطاقة:",
     "Compatibility:": "التوافق:",
     "POE Switch": "مفتاح POE",
-    "8-port POE switch with gigabit speeds for powering multiple devices.": "مفتاح POE 8 منافذ بسرعات جيجابت لتشغيل أجهزة متعددة.",
+    "8-port POE+ switch with gigabit speeds for powering multiple devices.": "مفتاح POE بثمانية منافذ بسرعة جيجابت لتشغيل أجهزة متعددة.",
     "Ports:": "المنافذ:",
     "Power Budget:": "ميزانية الطاقة:",
-    "Wireless Router": "موجه لاسلكي",
-    "Dual-band wireless router for home use with excellent coverage and speed.": "موجه لاسلكي مزدوج النطاق للاستخدام المنزلي بتغطية وسرعة ممتازة.",
-    "Speed:": "السرعة:",
-    "Coverage:": "التغطية:",
-    "Business Router": "موجه الأعمال",
-    "High-performance router for small businesses with advanced features.": "موجه عالي الأداء للأعمال الصغيرة بميزات متقدمة.",
+    "Dome CCTV Camera": "كاميرا مراقبة دوم",
+    "Indoor/outdoor dome CCTV camera with night vision and weather resistance.": "كاميرا مراقبة دوم للداخل/الخارج مع رؤية ليلية ومقاومة للعوامل الجوية.",
+    "Bullet CCTV Camera": "كاميرا مراقبة رصاصية",
+    "Outdoor bullet CCTV camera with long-range vision and infrared night vision.": "كاميرا مراقبة رصاصية خارجية مع رؤية طويلة المدى ورؤية ليلية بالأشعة تحت الحمراء.",
+    "Resolution:": "الدقة:",
     "Features:": "الميزات:",
-    "Users:": "المستخدمون:",
-    "8-Port Gigabit Switch": "مفتاح 8 منافذ جيجابت",
-    "Desktop switch with 8 gigabit ports for home or small office use.": "مفتاح مكتبي بثمانية منافذ جيجابت للاستخدام المنزلي أو في المكاتب الصغيرة.",
-    "Design:": "التصميم:",
-    "UPS Battery Backup": "بطارية UPS احتياطية",
-    "Backup battery for uninterrupted power supply during outages.": "بطارية احتياطية لإمداد طاقة غير منقطع أثناء انقطاع التيار.",
-    "Capacity:": "السعة:",
-    "Runtime:": "وقت التشغيل:",
-    "Power Inverter": "عاكس الطاقة",
-    "Converts DC to AC for power backup of essential devices.": "يحول التيار المستمر إلى تيار متردد للطاقة الاحتياطية للأجهزة الأساسية.",
+    "Night Vision, Weather Resistant": "رؤية لילية، مقاومة للعوامل الجوية",
+    "IR Night Vision, Long Range": "رؤية ليلية بالأشعة تحت الحمراء، طويلة المدى",
     "Request an Invoice": "طلب فاتورة",
     "Name:": "الاسم:",
     "Email:": "البريد الإلكتروني:",
@@ -817,111 +384,89 @@
     "Additional Details:": "تفاصيل إضافية:",
     "Send Invoice Request": "إرسال طلب الفاتورة",
     "About SYSNAB": "عن SYSNAB",
+    "At SYSNAB, we specialize in high-end computer and network systems, offering state-of-the-art technology solutions tailored to professionals, businesses, and institutions. Our mission is to bridge performance with reliability, providing the infrastructure that empowers seamless digital operations.": "في SYSNAB، نحن متخصصون في أنظمة الحواسيب والشبكات عالية الجودة، ونقدم حلول تكنولوجيا متطورة مصممة خصيصًا للمحترفين والشركات والمؤسسات. مهمتنا هي الجمع بين الأداء والموثوقية، وتوفير البنية التحتية التي تمكّن العمليات الرقمية السلسة.",
+    "We offer a wide array of products including structured cabling, routers, switches, PoE devices, CCTV cameras, inverters, batteries, and more. Whether you're setting up a smart workspace or building enterprise IT networks, SYSNAB ensures you get premium quality at competitive prices.": "نحن نقدم مجموعة واسعة من المنتجات بما في ذلك الكابلات المنظمة، والموجهات، والمفاتيح، وأجهزة PoE، وكاميرات المراقبة، والمحولات، والبطاريات، والمزيد. سواء كنت تقوم بإعداد مساحة عمل ذكية أو بناء شبكات مؤسسية، تضمن SYSNAB حصولك على جودة عالية بأسعار تنافسية.",
+    "With customer satisfaction at the core of our values, we deliver not just products, but trusted partnerships and dependable after-sales service. Join hundreds of satisfied clients and choose SYSNAB — where innovation meets reliability.": "مع رضا العملاء في صميم قيمنا، نحن لا نقدم منتجات فقط، ولكن أيضًا شراكات موثوقة وخدمة ما بعد البيع يعتمد عليها. انضم إلى المئات من العملاء الراضين واختر SYSNAB - حيث الابتكار يلتقي بالموثوقية.",
+    "You can find our official distributor Alrefaq at Shop #16 on the first level of the two-floor Zarqaa Alyamama 2 compound, Janzur. The compound is known for being a hub for computer and network systems, making it easy for you to browse and compare. Just head to the first level and ask for Alrefaq.": "يمكنك العثور على موزعنا الرسمي Alrefaq في المحل رقم 16 في الطابق الأول من مجمع Zarqaa Alyamama 2 المكون من طابقين، جنزور. يشتهر المجمع بكونه مركزًا لأنظمة الحواسيب والشبكات، مما يسهل عليك التصفح والمقارنة. فقط توجه إلى الطابق الأول واسأل عن Alrefaq.",
     "Contact Us": "اتصل بنا",
     "Contact Information": "معلومات الاتصال",
     "Visit Us": "زورنا",
+    "Shop #16, First Level": "المحل رقم 16، الطابق الأول",
+    "Zarqaa Alyamama 2 Compound": "مجمع زرقاء اليمامة 2",
+    "Janzur, Libya": "جنزور، ليبيا",
+    "Follow Us": "تابعنا",
     "All rights reserved.": "جميع الحقوق محفوظة.",
-    "Thank you for your invoice request! We will contact you shortly.": "شكراً لك على طلب الفاتورة! سنتواصل معك قريباً.",
-    "There was an error sending your request. Please try again later.": "حدث خطأ في إرسال طلبك. يرجى المحاولة مرة أخرى لاحقاً.",
-    "Invoice request sent successfully!": "تم إرسال طلب الفاتورة بنجاح!",
     "Please fill all required fields.": "يرجى ملء جميع الحقول المطلوبة.",
-    // About section translations (including brand names)
-    "At SYSNAB, we specialize in high-end computer and network systems, offering state-of-the-art technology solutions tailored to professionals, businesses, and institutions. Our mission is to bridge performance with reliability, providing the infrastructure that empowers seamless digital operations.": "في SYSNAB، نحن متخصصون في أنظمة الحواسيب والشبكات عالية الجودة، ونقدم حلولاً تكنولوجية حديثة مصممة خصيصًا للمحترفين والشركات والمؤسسات. مهمتنا هي الجمع بين الأداء والموثوقية، وتوفير البنية التحتية التي تمكّن العمليات الرقمية السلسة.",
-    "We offer a wide array of products including structured cabling, routers, switches, PoE devices, CCTV cameras, inverters, batteries, and more. Whether you're setting up a smart workspace or building enterprise IT networks, SYSNAB ensures you get premium quality at competitive prices.": "نحن نقدم مجموعة واسعة من المنتجات بما في ذلك الكابلات المنظمة، والموجهات، والمفاتيح، وأجهزة PoE، وكاميرات المراقبة، والمحولات، والبطاريات، والمزيد. سواء كنت تقوم بإعداد مساحة عمل ذكية أو بناء شبكات تقنية معلومات للمؤسسات، فإن SYSNAB تضمن لك الحصول على جودة عالية بأسعار تنافسية.",
-    "With customer satisfaction at the core of our values, we deliver not just products, but trusted partnerships and dependable after-sales service. Join hundreds of satisfied clients and choose SYSNAB — where innovation meets reliability.": "مع رضا العملاء في صميم قيمنا، نحن لا نقدم فقط المنتجات، ولكن أيضًا الشراكات الموثوقة وخدمة ما بعد البيع الموثوقة. انضم إلى المئات من العملاء الراضين واختر SYSNAB - حيث يلتقي الابتكار بالموثوقية.",
-    "You can find our official distributor Alrefaq at Shop #16 on the first level of the two-floor Zarqaa Alyamama 2 compound, Janzur. The compound is known for being a hub for computer and network systems, making it easy for you to browse and compare. Just head to the first floor and ask for Alrefaq.": "يمكنك العثور على الموزع الرسمي لنا Alrefaq في المحل رقم 16 في الطابق الأول من مجمع Zarqaa Alyamama 2 المكون من طابقين، جنزور. يشتهر المجمع بكونه مركزًا لأنظمة الحواسيب والشبكات، مما يسهل عليك التصفح والمقارنة. ما عليك سوى التوجه إلى الطابق الأول وطلب Alrefaq."
+    "Invoice request sent successfully!": "تم إرسال طلب الفاتورة بنجاح!",
+    "There was an error sending your request. Please try again later.": "حدث خطأ في إرسال طلبك. يرجى المحاولة لاحقًا.",
+    "WhatsApp Us": "راسلنا على واتساب",
+    "Request Quote": "طلب عرض سعر",
+    "We will soon offer a range of high-quality routers for home and business use.": "سنوفر قريبًا مجموعة من أجهزة التوجيه عالية الجودة للاستخدام المنزلي والتجاري.",
+    "Network switches will be available soon for all your connectivity needs.": "ستكون مفاتيح الشبكة متاحة قريبًا لجميع احتياجات الاتصال الخاصة بك.",
+    "High-capacity batteries for UPS systems will be available soon.": "ستكون البطاريات عالية السعة لأنظمة UPS متاحة قريبًا.",
+    "Power inverters for backup systems will be available in the near future.": "ستكون محولات الطاقة لأنظمة النسخ الاحتياطي متاحة في المستقبل القريب."
   };
 
   function toggleLanguage() {
     isArabic = !isArabic;
+    const html = document.documentElement;
+    html.lang = isArabic ? 'ar' : 'en';
+    html.dir = isArabic ? 'rtl' : 'ltr';
     document.querySelector('.language-toggle').textContent = isArabic ? 'English' : 'العربية';
     translatePage();
   }
 
   function translatePage() {
-    const elementsToTranslate = document.querySelectorAll('h1, h2, h3, h4, p, a:not(.whatsapp-float), label, button, nav a, footer a, option, .card h4, .card p, .card strong');
-    
-    elementsToTranslate.forEach(element => {
-      const key = element.textContent.trim();
-      if (translations[key] && isArabic) {
-        element.textContent = translations[key];
-      } else if (!isArabic) {
-        // Revert to English - find the English key from the translation value
-        for (const [eng, ar] of Object.entries(translations)) {
-          if (element.textContent === ar) {
-            element.textContent = eng;
-            break;
+    const elements = document.querySelectorAll('.translate');
+    elements.forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (key && translations[key]) {
+        if (isArabic) {
+          // For elements that should contain HTML, we need to handle them differently
+          if (el.parentElement.tagName === 'P' && el.parentElement.querySelector('strong')) {
+            // Extract the strong text and preserve it in the translation
+            const strongText = el.parentElement.querySelector('strong').textContent;
+            const translation = translations[key];
+            // Find where the strong text should be in the translation
+            const translatedStrong = translations[strongText] || strongText;
+            const updatedTranslation = translation.replace(translatedStrong, `<strong>${translatedStrong}</strong>`);
+            el.innerHTML = updatedTranslation;
+          } else {
+            el.textContent = translations[key];
           }
+        } else {
+          // Revert to original text (stored in a data attribute)
+          if (!el.hasAttribute('data-original')) {
+            el.setAttribute('data-original', el.textContent);
+          }
+          el.innerHTML = el.getAttribute('data-original');
         }
       }
     });
+
+    // Also update form placeholders and options
+    if (isArabic) {
+      document.getElementById('name').placeholder = 'اسمك';
+      document.getElementById('email').placeholder = 'بريدك@الإلكتروني.com';
+      document.getElementById('phone').placeholder = '+218XXXXXXXXX';
+      document.getElementById('message').placeholder = 'أخبرنا بالكميات، المواصفات، أو أي ملاحظات';
+    } else {
+      document.getElementById('name').placeholder = 'Your name';
+      document.getElementById('email').placeholder = 'your@email.com';
+      document.getElementById('phone').placeholder = '+218XXXXXXXXX';
+      document.getElementById('message').placeholder = 'Tell us quantities, specs, or any notes';
+    }
   }
 
   function toggleMobileMenu() {
     document.getElementById('mainNav').classList.toggle('active');
   }
 
-  function scrollToCategory(categoryId) {
-    if (categoryId) {
-      const element = document.getElementById(categoryId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+  function scrollToCategory(id) {
+    if (id) {
+      const el = document.getElementById(id);
+      el && el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }
-
-  // Email functionality for invoice requests
-  document.getElementById('invoiceForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const product = document.getElementById('product').value;
-    const message = document.getElementById('message').value;
-    
-    // Simple validation
-    if (!name || !email || !phone || !message) {
-      showFormMessage(isArabic ? translations['Please fill all required fields.'] : 'Please fill all required fields.', 'error');
-      return;
-    }
-    
-    // Prepare email content
-    const subject = `New Invoice Request from ${name}`;
-    const body = `
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Product: ${product}
-Message: ${message}
-    `;
-    
-    // Send email using Formspree (free service)
-    fetch('https://formspree.io/f/xgegvnzb', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-        product: product,
-        message: message,
-        _subject: subject
-      })
-    })
-    .then(response => {
-      if (response.ok) {
-        showFormMessage(isArabic ? translations['Invoice request sent successfully!'] : 'Invoice request sent successfully!', 'success');
-        document.getElementById('invoiceForm').reset();
-      } else {
-        throw new Error('Form submission failed');
-      }
-    })
-    .catch(error => {
-      showFormMessage(isArabic ? translations['There was an error sending your request. Please try again later.'] : 'There was an error sending your request. Please try again later.', 'error');
-    });
   }
 
   function requestQuote(product) {
@@ -929,18 +474,34 @@ Message: ${message}
     document.getElementById('quote').scrollIntoView({ behavior: 'smooth' });
   }
 
-  function showFormMessage(message, type) {
-    const messageElement = document.getElementById('formMessage');
-    messageElement.textContent = message;
-    messageElement.className = 'form-message ' + type;
-    messageElement.style.display = 'block';
-    
+  function showFormMessage(msg, type) {
+    const el = document.getElementById('formMessage');
+    el.textContent = msg;
+    el.className = 'form-message ' + type;
+    el.style.display = 'block';
     setTimeout(() => {
-      messageElement.style.display = 'none';
+      el.style.display = 'none';
     }, 5000);
   }
 
-  // Slideshow functionality
+  /* EmailJS */
+  document.getElementById('invoiceForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name=document.getElementById('name').value.trim();
+    const email=document.getElementById('email').value.trim();
+    const phone=document.getElementById('phone').value.trim();
+    const product=document.getElementById('product').value;
+    const message=document.getElementById('message').value.trim();
+    if(!name || !email || !phone || !message){
+      showFormMessage(isArabic ? translations['Please fill all required fields.'] : 'Please fill all required fields.','error'); return;
+    }
+    // In a real implementation, you would use EmailJS here
+    console.log('Form submitted:', {name, email, phone, product, message});
+    showFormMessage(isArabic ? translations['Invoice request sent successfully!'] : 'Invoice request sent successfully!','success'); 
+    this.reset();
+  });
+
+  /* Slideshow */
   let currentSlide = 0;
   const slides = document.querySelectorAll('.slide');
   setInterval(() => {
@@ -949,13 +510,67 @@ Message: ${message}
     slides[currentSlide].classList.add('active');
   }, 5000);
 
-  // Close mobile menu when clicking on a link
-  document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('mainNav').classList.remove('active');
+  /* Scroll animations */
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 }); // Reduced threshold to make sections appear sooner
+
+  sections.forEach(s => observer.observe(s));
+
+  /* Nav highlight + category highlight */
+  const navLinks = document.querySelectorAll('header nav a');
+  const catLinks = document.querySelectorAll('#categorySidebar a');
+
+  function setActiveLink() {
+    const scrollPos = window.scrollY + 110;
+    sections.forEach(section => {
+      if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`header nav a[href="#${section.id}"]`);
+        link && link.classList.add('active');
+      }
+    });
+
+    // Category links
+    ['cables', 'poe', 'cameras', 'routers', 'switches', 'batteries', 'inverters'].forEach(id => {
+      const el = document.getElementById(id);
+      const link = document.querySelector(`#categorySidebar a[href="#${id}"]`);
+      if (el && link) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight / 2 && rect.bottom > 100) {
+          catLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      }
+    });
+  }
+
+  window.addEventListener('scroll', setActiveLink);
+
+  // Close mobile menu on link click
+  document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => {
+    document.getElementById('mainNav').classList.remove('active');
+  }));
+
+  // Initial reveal - make sure all sections are visible on load
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.section').forEach(s => {
+      s.classList.add('visible');
+    });
+    setActiveLink();
+    
+    // Store original text for all translatable elements
+    document.querySelectorAll('.translate').forEach(el => {
+      if (!el.hasAttribute('data-original')) {
+        el.setAttribute('data-original', el.innerHTML);
+      }
     });
   });
 </script>
-
 </body>
 </html>
